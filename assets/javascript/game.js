@@ -1,62 +1,58 @@
 /*Instructions:
 
-1. The game starts with the computer randomly picking a letter and the player(user) is going to guess this letter.
+1. The game starts with the computer zoltarly picking a letter and the player(user) is going to guess this letter.
 
 2. The game will start when the player presses any letter (no symbols) from the keyboard, these letters will be printed
 below, the player will only have 10 guesses before the game is over.
 
-3. If the player guesses the random letter it will be recorder in the "Wins" counter, if the player can't guess then it
+3. If the player guesses the zoltar letter it will be recorder in the "Wins" counter, if the player can't guess then it
 be recored in the "losses" counter.
 
 4. The game will automatically restart after pressing the keyboard 10 times (regardless of winning or losing). */
 
-//First we establish the variables with their respective counters
-var won = 0;
-var lost = 0;
-var attempts = 10;
-var usedArray = [];
-var ranLetter = ranLetter;
-var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",];
+//First, create the array with the options that Zoltar will take in mind
+var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", ];
 
-//Next, the letter that Zoltar will randomly choose
-ranLetter = letters[Math.floor(Math.random() * letters.length)];
-console.log(ranLetter); //- to see if this works so far
+//Next, the main variables
+var letterGuesses = [];
+var wins = 0;
+var losses = 0;
+var guessesLeft = 10;
+var zoltar = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-//Then the random number generated will select a letter from the array and assign it to the variable ranLetter
-function jsGuess() {
-      ranLetter = letters[Math.floor(Math.random() * letters.length)];
-console.log(ranLetter); //- to see if this works so far
+function reset() {
+      guessesLeft = 10;
+      letterGuesses = [];
+      zoltar = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      console.log(zoltar);
 }
 
-// The.onkeyup will get the player's choice
+//When the user presses any key, run the function
 document.onkeyup = function (event) {
-      var playerGuess = event.key;
+      var userGuess = event.key;
+      letterGuesses.push(userGuess); //push the previously declared variable
+      var temp = document.getElementById("userGuesses"); //bring the id from the html file
+      temp.textContent = userGuess;
 
-// If the player is correct
-      if (playerGuess === ranLetter) {
+      if (userGuess != zoltar) { //!= not equal
+            guessesLeft--; //--decrement operator to subtract from the total number of guesses
+            var temp = document.getElementById("guesses");
+            temp.textContent = guessesLeft;
+      }
+      
+      else if (userGuess === zoltar) {
             wins++;
-            attempts = 10;
-            usedArray = [];
+            var temp = document.getElementById("wins");
+            temp.textContent = wins;
+            alert ("Correct! The letter was: " + zoltar);
+            reset();
       }
 
-//If the player is incorrect - wrong answers will count as attempts
-      jsGuess();
-      if (playerGuess !== ranLetter) {
-            attempts--;
-      }
-
-//If the player runs out of attempts then the "losses" counter will start counting
-      if (attempts == 0) {
+      if (guessesLeft === 0) {
             losses++;
-            usedArray = []
-            attempts = 10;
+            var temp = document.getElementById("losses");
+            temp.textContent = losses;
+            alert ("You tried enough! The correct letter was: " + zoltar);
+            reset();
       }
-
-//Writing the information in the html - bootstrap document - and this is where it goes to hell
-      document.getElementById("wins").innerHTML = won;
-      document.getElementById("losses").innerHTML = lost;
-      document.getElementById("attempts").innerHTML = attempts;
-			
 }
-
-

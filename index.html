@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
     <!--CSS and JavaScript links-->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script type="text/javascript" src="assets/javascript/game.js"></script>
+
 
 </head>
 
@@ -22,9 +23,9 @@
             <h2>Can you guess what letter I'm thinking of?</h2>
         </div>
     </section>
-    
+
     <!--Card with psychic and the copy-->
-    <div class= "container" id="js-game">
+    <div class="container" id="js-game">
         <div class="row">
             <div class="col-lg-4">
                 <div class="card">
@@ -34,21 +35,33 @@
             <div class="col-lg-6">
                 <div class="card">
                     <h2 class="card-header">Results</h2>
-                        <div class="card-body">
-                            <h2 id= "wins">Wins:</h2>
-                            <h2 id= "losses">Losses:</h2>
-                            <h2 id="attempts">Attempts:</h2>
-                        </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h3>Wins: <span id="wins"></span></h3>
+                            </li>
+                            <li class="list-group-item">
+                                <h3>Losses: <span id="losses"></span></h3>
+                            </li>
+                            <li class="list-group-item">
+                                <h3>Guesses left: <span id="guesses"></span></h3>
+                            </li>
+                            <li class="list-group-item">
+                                <h3>You selected: <span id="userGuesses"></span></h3>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    
-     
 
-    
 
+
+
+
+    <script type="text/javascript" src="assets/javascript/game.js"></script>
 
 </body>
+
 </html>
